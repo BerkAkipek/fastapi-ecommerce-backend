@@ -1,5 +1,6 @@
 import uvicorn
 
+
 def main():
     print("Hello form fastapi_ecommerce_backend!")
     uvicorn.run("app.main:app", host="0.0.0.0", port=8084, reload=True)

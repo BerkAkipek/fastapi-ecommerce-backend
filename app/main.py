@@ -1,10 +1,12 @@
 from contextlib import asynccontextmanager
-from app.db.database import engine
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.router import api_router
 from sqlalchemy import text
+
+from app.api.router import api_router
 from app.core.config import settings
+from app.db.database import engine
 
 
 @asynccontextmanager
@@ -17,7 +19,7 @@ async def lifespan(_: FastAPI):
         print(f"DB connected at: {settings.DATABASE_URL}")
     except Exception as e:
         print(f"DB connection is failed with: \n{e}")
-        raise e
+        raise
     yield
     await engine.dispose()
     print("DB connaction pool closed.")
